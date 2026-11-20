@@ -25,6 +25,16 @@ jobs:
       - name: Références de la skill à jour
         run: node scripts/generer-skill.mjs --verifier
 
+  skill:
+    name: Skill conforme (Olympe)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: Carolinedanslesnuages/olympe@v1
+        with:
+          chemins: skill
+          strict: "true"
+
   titre:
     name: Titre de PR (Conventional Commits)
     if: github.event_name == 'pull_request'
