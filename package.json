@@ -1,0 +1,16 @@
+{
+  "name": "@carolinedanslesnuages/marguerite",
+  "version": "0.0.0",
+  "description": "Le RGAA 4.1.2 officiel pour les agents de code : serveur MCP, skill et commande. Critères, tests, méthodologies et glossaire, sans rien inventer.",
+  "type": "module",
+  "bin": { "marguerite": "bin/marguerite.mjs" },
+  "files": ["bin", "src", "referentiel", "skill"],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "skill": "node scripts/generer-skill.mjs"
+  },
+  "keywords": ["rgaa", "accessibilite", "mcp", "agent-skills", "claude-code", "a11y"],
+  "repository": { "type": "git", "url": "git+https://github.com/Carolinedanslesnuages/marguerite.git" },
+  "license": "MIT"
+}
