@@ -145,5 +145,5 @@
 - **13.11** Dans chaque page web, les actions déclenchées au moyen d’un dispositif de pointage sur un point unique de l’écran peuvent-elles faire l’objet d’une annulation (hors cas particuliers) ?
 - **13.12** Dans chaque page web, les fonctionnalités qui impliquent un mouvement de l’appareil ou vers l’appareil peuvent-elles être satisfaites de manière alternative (hors cas particuliers) ?
 
-> Généré par `scripts/generer-skill.mjs` depuis les fichiers officiels : ne pas modifier à la main.
+> Généré par `scripts/build-skill.mjs` depuis les fichiers officiels : ne pas modifier à la main.
 > Source : RGAA 4.1.2, DINUM, https://accessibilite.numerique.gouv.fr (Licence Ouverte 2.0).

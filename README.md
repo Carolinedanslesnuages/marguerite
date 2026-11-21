@@ -59,7 +59,7 @@ npx github:Carolinedanslesnuages/marguerite definition "lien d'évitement"
 
 Le référentiel vient des fichiers officiels de la DINUM, dépôt
 [DISIC/accessibilite.numerique.gouv.fr](https://github.com/DISIC/accessibilite.numerique.gouv.fr),
-copiés sans modification dans [`referentiel/4.1.2`](referentiel/4.1.2/SOURCE.md). Ces contenus
+copiés sans modification dans [`rgaa/4.1.2`](rgaa/4.1.2/SOURCE.md). Ces contenus
 sont sous [Licence Ouverte 2.0](https://www.etalab.gouv.fr/licence-ouverte-open-licence/) ;
 source : DINUM, https://accessibilite.numerique.gouv.fr.
 

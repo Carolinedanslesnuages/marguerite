@@ -9,7 +9,7 @@
   "files": [
     "bin",
     "src",
-    "referentiel",
+    "rgaa",
     "skill"
   ],
   "engines": {
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "test": "node --test test/*.test.mjs",
-    "skill": "node scripts/generer-skill.mjs"
+    "skill": "node scripts/build-skill.mjs"
   },
   "keywords": [
     "rgaa",

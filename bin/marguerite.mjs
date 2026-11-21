@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-/** Marguerite : le RGAA officiel pour les agents de code, et pour vous. */
+/** Marguerite: the official RGAA for coding agents, and for you. */
 import { readFileSync } from 'node:fs';
-import { appeler } from '../src/serveur.mjs';
-import { demarrer } from '../src/serveur.mjs';
+import { callTool, startServer } from '../src/server.mjs';
 
 const { version } = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8'));
 
-const AIDE = `Marguerite · le RGAA 4.1.2 officiel, pour les agents de code et pour vous
+const HELP = `Marguerite · le RGAA 4.1.2 officiel, pour les agents de code et pour vous
 
 Usage :
   marguerite critere <numéro>     un critère (11.1) ou un test (11.1.2), avec sa méthodologie
@@ -17,19 +16,26 @@ Usage :
 
 Source : DINUM, https://accessibilite.numerique.gouv.fr (Licence Ouverte 2.0).`;
 
-const [commande, ...reste] = process.argv.slice(2);
-const arg = reste.join(' ');
-const OUTIL = { critere: ['rgaa_critere', 'numero'], chercher: ['rgaa_chercher', 'texte'], theme: ['rgaa_theme', 'numero'], definition: ['rgaa_definition', 'terme'] };
-const cle = commande && commande.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
+/** Command → [MCP tool, argument name]. */
+const COMMAND_TOOLS = {
+  critere: ['rgaa_critere', 'numero'],
+  chercher: ['rgaa_chercher', 'texte'],
+  theme: ['rgaa_theme', 'numero'],
+  definition: ['rgaa_definition', 'terme'],
+};
 
-if (cle === 'serveur') demarrer(version);
-else if (OUTIL[cle]) {
-  const [outil, param] = OUTIL[cle];
-  const r = appeler(outil, arg ? { [param]: arg } : {});
-  console.log(r.content[0].text);
-  if (r.isError) process.exit(1);
-} else if (!commande || ['aide', '--aide', '-h', '--help'].includes(cle)) console.log(AIDE);
+const [command, ...rest] = process.argv.slice(2);
+const argument = rest.join(' ');
+const commandKey = command && command.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
+
+if (commandKey === 'serveur') startServer(version);
+else if (COMMAND_TOOLS[commandKey]) {
+  const [toolName, argumentName] = COMMAND_TOOLS[commandKey];
+  const result = callTool(toolName, argument ? { [argumentName]: argument } : {});
+  console.log(result.content[0].text);
+  if (result.isError) process.exit(1);
+} else if (!command || ['aide', '--aide', '-h', '--help'].includes(commandKey)) console.log(HELP);
 else {
-  console.error(`marguerite : commande inconnue « ${commande} ». Tapez « marguerite aide ».`);
+  console.error(`marguerite : commande inconnue « ${command} ». Tapez « marguerite aide ».`);
   process.exit(1);
 }
