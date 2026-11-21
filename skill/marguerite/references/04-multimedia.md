@@ -1,6 +1,6 @@
 # Thème 4 — Multimédia (RGAA 4.1.2)
 
-> Généré par `scripts/generer-skill.mjs` depuis les fichiers officiels : ne pas modifier à la main.
+> Généré par `scripts/build-skill.mjs` depuis les fichiers officiels : ne pas modifier à la main.
 > Source : RGAA 4.1.2, DINUM, https://accessibilite.numerique.gouv.fr (Licence Ouverte 2.0).
 
 ## Critère 4.1 (thème Multimédia)

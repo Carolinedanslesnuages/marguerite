@@ -1,33 +1,33 @@
-/** Mise en forme Markdown des réponses (serveur MCP, commande, skill). */
-import { VERSION, SITE, THEMES } from './referentiel.mjs';
+/** Markdown formatting of answers (MCP server, command, skill). */
+import { VERSION, SITE, TOPICS } from './rgaa.mjs';
 
 export const SOURCE = `Source : RGAA ${VERSION}, DINUM, ${SITE} (Licence Ouverte 2.0).`;
 
-/** Un critère complet : titre, tests, méthodologie (si demandée), cas particuliers, références. */
-export function critereEnMarkdown(c, { methodologie = true } = {}) {
-  const l = [`## Critère ${c.numero} (thème ${c.theme})`, '', `**${c.titre}**`, ''];
-  for (const t of c.tests) {
-    const vise = c.testDemande && c.testDemande !== t.id;
-    if (vise) continue; // un test précis a été demandé : on n'affiche que lui
-    l.push(`### Test ${t.id}`, '', t.question);
-    t.conditions.forEach((cond) => l.push(`- ${cond}`));
-    if (methodologie && t.methodologie) l.push('', '**Méthodologie de test**', '', t.methodologie);
-    l.push('');
+/** A full criterion: title, tests, methodology (when asked), particular cases, references. */
+export function criterionMarkdown(criterion, { methodology = true } = {}) {
+  const lines = [`## Critère ${criterion.number} (thème ${criterion.topicName})`, '', `**${criterion.title}**`, ''];
+  for (const test of criterion.tests) {
+    // A specific test was requested: only show that one.
+    if (criterion.requestedTest && criterion.requestedTest !== test.testId) continue;
+    lines.push(`### Test ${test.testId}`, '', test.question);
+    test.conditions.forEach((condition) => lines.push(`- ${condition}`));
+    if (methodology && test.methodology) lines.push('', '**Méthodologie de test**', '', test.methodology);
+    lines.push('');
   }
-  if (c.casParticuliers.length) l.push('### Cas particuliers', '', ...c.casParticuliers, '');
-  if (c.notesTechniques.length) l.push('### Notes techniques', '', ...c.notesTechniques, '');
-  if (c.wcag.length) l.push(`**WCAG 2.1** : ${c.wcag.join(' · ')}`);
-  if (c.techniques.length) l.push(`**Techniques WCAG** : ${c.techniques.join(', ')}`);
-  l.push(`**Fiche officielle** : ${c.lien}`);
-  return l.join('\n');
+  if (criterion.particularCases.length) lines.push('### Cas particuliers', '', ...criterion.particularCases, '');
+  if (criterion.technicalNotes.length) lines.push('### Notes techniques', '', ...criterion.technicalNotes, '');
+  if (criterion.wcag.length) lines.push(`**WCAG 2.1** : ${criterion.wcag.join(' · ')}`);
+  if (criterion.techniques.length) lines.push(`**Techniques WCAG** : ${criterion.techniques.join(', ')}`);
+  lines.push(`**Fiche officielle** : ${criterion.link}`);
+  return lines.join('\n');
 }
 
-export const ligneCritere = (c) => `- **${c.numero}** ${c.titre}`;
+export const criterionLine = (criterion) => `- **${criterion.number}** ${criterion.title}`;
 
-export function themeEnMarkdown(t) {
-  return [`## Thème ${t.numero} — ${t.nom}`, '', ...t.criteres.map(ligneCritere)].join('\n');
+export function topicMarkdown(topic) {
+  return [`## Thème ${topic.number} — ${topic.name}`, '', ...topic.criteria.map(criterionLine)].join('\n');
 }
 
-export function index() {
-  return [`# RGAA ${VERSION} — les 106 critères`, '', ...THEMES.map((t) => themeEnMarkdown(t) + '\n')].join('\n');
+export function indexMarkdown() {
+  return [`# RGAA ${VERSION} — les 106 critères`, '', ...TOPICS.map((topic) => topicMarkdown(topic) + '\n')].join('\n');
 }

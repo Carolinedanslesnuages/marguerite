@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: npm test
       - name: Références de la skill à jour
-        run: node scripts/generer-skill.mjs --verifier
+        run: node scripts/build-skill.mjs --verifier
 
   skill:
     name: Skill conforme (Olympe)
