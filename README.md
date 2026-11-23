@@ -22,7 +22,7 @@ communiquer là où il n'en existait pas.
 Il faut Node.js 20 ou plus récent. Dans un projet, avec Claude Code :
 
 ```sh
-claude mcp add marguerite -- npx -y github:Carolinedanslesnuages/marguerite serveur
+claude mcp add marguerite -- npx -y @carolinedanslesnuages/marguerite serveur
 ```
 
 | Outil | Exemple | Réponse |
@@ -49,10 +49,10 @@ Copiez le dossier [`skill/marguerite`](skill/marguerite) dans `.claude/skills/` 
 ## Commande
 
 ```sh
-npx github:Carolinedanslesnuages/marguerite critere 11.1
-npx github:Carolinedanslesnuages/marguerite chercher contraste
-npx github:Carolinedanslesnuages/marguerite theme 11
-npx github:Carolinedanslesnuages/marguerite definition "lien d'évitement"
+npx @carolinedanslesnuages/marguerite critere 11.1
+npx @carolinedanslesnuages/marguerite chercher contraste
+npx @carolinedanslesnuages/marguerite theme 11
+npx @carolinedanslesnuages/marguerite definition "lien d'évitement"
 ```
 
 ## Source et licence
